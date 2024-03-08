@@ -14,15 +14,15 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/notes")
-public class NotaController {
+public class NoteController {
     @Autowired
     private NoteRepository repository;
 
     @PostMapping
-    public ResponseEntity<Note> create(@RequestBody Note dadosNote) {
+    public ResponseEntity<Note> create(@RequestBody Note dataNote) {
         try {
 //          Nota nota = new Nota(dadosNota);
-            return ResponseEntity.ok(repository.saveAndFlush(dadosNote));
+            return ResponseEntity.ok(repository.saveAndFlush(dataNote));
         }catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -40,15 +40,14 @@ public class NotaController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         try {
-            Optional nota = repository.findById(id);
+            Optional note = repository.findById(id);
 
-            if (nota.isPresent()){
-                Note noteVerificadora = (Note) nota.get();
-
+            if (note.isPresent()){
                 repository.deleteById(id);
                 ResponseEntity response = ResponseEntity.ok().build();
+
                 if (repository.findById(id) == null) {
-                    Note.diminuiContadorNotas();
+                    Note.decreaseCounterNotes();
                 }
                 return response;
             }
@@ -59,17 +58,16 @@ public class NotaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id, @RequestBody Note dadosNote) {
+    public ResponseEntity update(@PathVariable Long id, @RequestBody Note dadaNote) {
         try {
-            Optional<Note> nota = repository.findById(id);
+            Optional<Note> note = repository.findById(id);
 
-            // Validação de duas etapas para atualizar evitando alteração no ID da URL
-            if (nota.isPresent() && id == dadosNote.getId()){
-                Note noteAtualizada = nota.get();
+            if (note.isPresent() && id == dadaNote.getId()){
+                Note noteUpdated = note.get();
 
-                noteAtualizada.updateNote(dadosNote);
+                noteUpdated.updateNote(dadaNote);
 
-                repository.saveAndFlush(noteAtualizada);
+                repository.saveAndFlush(noteUpdated);
                 return ResponseEntity.ok().build();
             }
         } catch (RuntimeException e) {

@@ -7,23 +7,24 @@ import java.util.Date;
 
 @Entity
 @Table(name = "notas")
-public class Nota {
-    private static Long contadorNotas = 0L;
+public class Note {
+    private static Long counterNotes = 0L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date dateNote;
+    @Column(length = 1024)
     private String content;
     @Enumerated(EnumType.STRING)
-    private EstiloNota style;
+    private StyleNote style;
     private String title;
     private String author;
     private String type;
 
     // Constructor -----
-    public Nota() {
+    public Note() {
         this.dateNote = new Date();
-        contadorNotas ++;
+        counterNotes++;
     }
 
     // Getters and Setters -----
@@ -48,11 +49,11 @@ public class Nota {
         this.content = content;
     }
 
-    public EstiloNota getStyle() {
+    public StyleNote getStyle() {
         return style;
     }
 
-    public void setStyle(EstiloNota style) {
+    public void setStyle(StyleNote style) {
         this.style = style;
     }
 
@@ -72,8 +73,8 @@ public class Nota {
         this.author = author;
     }
 
-    public static Long getContadorNotas() {
-        return contadorNotas;
+    public static Long getCounterNotes() {
+        return counterNotes;
     }
 
     public String getType() {
@@ -85,16 +86,16 @@ public class Nota {
     }
 
     // Methods -----
-    public void atualizaNota(@NotNull Nota dadosNota) {
+    public void updateNote(@NotNull Note dadosNote) {
         this.dateNote = new Date();
-        this.content = dadosNota.content;
-        this.style = dadosNota.style;
-        this.title = dadosNota.title;
-        this.author = dadosNota.author;
+        this.content = dadosNote.content;
+        this.style = dadosNote.style;
+        this.title = dadosNote.title;
+        this.author = dadosNote.author;
     }
 
-    public static void diminuiContadorNotas() {
-        contadorNotas --;
+    public static void decreaseCounterNotes() {
+        counterNotes--;
     }
 
 }

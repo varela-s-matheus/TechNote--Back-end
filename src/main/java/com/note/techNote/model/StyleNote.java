@@ -1,6 +1,6 @@
 package com.note.techNote.model;
 
-public enum EstiloNota {
+public enum StyleNote {
     black,
     white,
     purpple
