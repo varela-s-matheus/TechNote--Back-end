@@ -1,6 +1,6 @@
 package com.note.techNote.controller;
 
-import com.note.techNote.model.Nota;
+import com.note.techNote.model.Note;
 import com.note.techNote.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/notes")
 public class NotaController {
@@ -18,17 +19,17 @@ public class NotaController {
     private NoteRepository repository;
 
     @PostMapping
-    public ResponseEntity<Nota> create(@RequestBody Nota dadosNota) {
+    public ResponseEntity<Note> create(@RequestBody Note dadosNote) {
         try {
-//            Nota nota = new Nota(dadosNota);
-            return ResponseEntity.ok(repository.saveAndFlush(dadosNota));
+//          Nota nota = new Nota(dadosNota);
+            return ResponseEntity.ok(repository.saveAndFlush(dadosNote));
         }catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Nota>> findAll() {
+    public ResponseEntity<List<Note>> findAll() {
         return ResponseEntity.ok(repository.findAll());
     }
 
@@ -42,12 +43,12 @@ public class NotaController {
             Optional nota = repository.findById(id);
 
             if (nota.isPresent()){
-                Nota notaVerificadora = (Nota) nota.get();
+                Note noteVerificadora = (Note) nota.get();
 
                 repository.deleteById(id);
                 ResponseEntity response = ResponseEntity.ok().build();
                 if (repository.findById(id) == null) {
-                    Nota.diminuiContadorNotas();
+                    Note.diminuiContadorNotas();
                 }
                 return response;
             }
@@ -58,17 +59,17 @@ public class NotaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id, @RequestBody Nota dadosNota) {
+    public ResponseEntity update(@PathVariable Long id, @RequestBody Note dadosNote) {
         try {
-            Optional<Nota> nota = repository.findById(id);
+            Optional<Note> nota = repository.findById(id);
 
             // Validação de duas etapas para atualizar evitando alteração no ID da URL
-            if (nota.isPresent() && id == dadosNota.getId()){
-                Nota notaAtualizada = nota.get();
+            if (nota.isPresent() && id == dadosNote.getId()){
+                Note noteAtualizada = nota.get();
 
-                notaAtualizada.atualizaNota(dadosNota);
+                noteAtualizada.updateNote(dadosNote);
 
-                repository.saveAndFlush(notaAtualizada);
+                repository.saveAndFlush(noteAtualizada);
                 return ResponseEntity.ok().build();
             }
         } catch (RuntimeException e) {
