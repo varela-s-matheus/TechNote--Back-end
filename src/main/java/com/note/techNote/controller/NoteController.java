@@ -33,7 +33,8 @@ public class NoteController {
         return ResponseEntity.ok(repository.findAll());
     }
 
-    public ResponseEntity<Optional> findById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable Long id) {
         return ResponseEntity.ok(repository.findById(id));
     }
 
