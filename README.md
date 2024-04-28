@@ -1,22 +1,20 @@
-# Backend da Aplicação MVC de Notas Informativas
+# Backend da Aplicação TechNote - Notas Informativas
 
-<p>Bem-vindo ao README do backend da nossa aplicação de notas informativas! 
-  Neste documento, você encontrará uma visão geral do backend, incluindo sua estrutura, tecnologias utilizadas e como integrar com o banco de dados PostgreSQL.</p>
-
-## Visão Geral
+## Sobre o Projeto
 
 <p>Backend de uma aplicação Web para criação, atualização e manipulação de notas informativas, para ser utilizado como mural de ideias. 
   Forma de visualizar pensamentos e conceitos sobre determinados assuntos.</p>
-<p>Nossa aplicação é desenvolvida em Java usando o framework Spring Boot. 
-  Ele é responsável por lidar com a lógica de negócios, manipulação de dados e comunicação com o banco de dados PostgreSQL, utilizando Spring Data JPA.</p>
+<p>Aplicação desenvolvida em Java usando o framework SpringBoot. 
+  Back-end responsável por lidar com a lógica de negócios, manipulação de dados e comunicação com o banco de dados PostgreSQL, utilizando Spring Data JPA.</p>
 
 ## Tecnologias Utilizadas
-### Linguagem de Programação:
-- Java
-### Framework Web:
-- Spring Boot
-### Banco de Dados:
-- PostgreSQL
+Projeto construido utilizando Java com framework SpringBoot e SpringData JPA para realizar a comunicação com o Banco de dados relacional, sendo o PostgreSQL.
+
+### Padrão do Projeto
+Utilizando o padrão de projeto MVC(Model-View-Controller), com o foco na organização e separação de responsabilidades.
+
+## Integrações
+Projeto é integrado com o Banco de dados PostgreSQL através do Driver e comunica-se com o Front-end através da API rest.
 
 ## Configuração do Banco de Dados PostgreSQL
 - Instale o PostgreSQL em sua máquina, se ainda não estiver instalado.
@@ -35,3 +33,13 @@ A tabela do banco deve ser criada automaticamente com a anotação:
 
 *spring.jpa.hibernate.ddl-auto=update*
 
+<a href="https://github.com/varela-s-matheus/TechNote--Front-end" target="_blank">Acessar Front-end desta aplicação</a>
+
+## Contatos
+
+<a href="https://linkedin.com/in/varela-s-matheus" target="_blank">
+  <img align="center" src="https://img.shields.io/badge/-MatheusVarela-05122A?style=flat&logo=linkedin" alt="linkedin"/>
+</a>
+<a href="https://www.instagram.com/varela_matheuus/" target="_blank">
+ <img align="center" src="https://img.shields.io/badge/-MatheusVarela-05122A?style=flat&logo=instagram" alt="instagram"/>
+</a>
